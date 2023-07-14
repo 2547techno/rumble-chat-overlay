@@ -9,14 +9,14 @@
 
 	function goToChannel() {
 		if (c === '') return;
-		goto(`/c/${c}`);
+		goto(`/overlay/c/${c}`);
 	}
 
 	function goToVideo() {
 		if (v === '') return;
 		const id = v.split('-')[0];
 
-		goto(`/v/${id}`);
+		goto(`/overlay/v/${id}`);
 	}
 </script>
 
