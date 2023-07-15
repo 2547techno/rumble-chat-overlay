@@ -11,9 +11,11 @@
 	let messageList: MessageList | undefined = new MessageList(0);
 	let messages: Message[] = [];
 	let emotes: Emote[] = [];
+	const url = new URL(`/events/chat/${sid}`, PUBLIC_API);
+	let error: { message: string } | undefined;
 
 	function createEventSource() {
-		const source = new EventSource(new URL(`/events/chat/${sid}`, PUBLIC_API));
+		const source = new EventSource(url);
 		messageList = new MessageList(50);
 
 		source.addEventListener('message', (msg) => {
@@ -34,6 +36,14 @@
 	}
 
 	onMount(async () => {
+		const res = await fetch(url);
+		if (!res.ok) {
+			error = {
+				message: 'Stream Is Not Live!'
+			};
+			return;
+		}
+
 		emotes = await getEmotes();
 		sse = createEventSource();
 	});
@@ -46,11 +56,15 @@
 	});
 </script>
 
-<div id="messages">
-	{#each messages as message}
-		<MessageCard {message} {emotes} {removeProfilePicture} />
-	{/each}
-</div>
+{#if error}
+	<h1>{error.message}</h1>
+{:else}
+	<div id="messages">
+		{#each messages as message}
+			<MessageCard {message} {emotes} {removeProfilePicture} />
+		{/each}
+	</div>
+{/if}
 
 <style scoped lang="scss">
 	#messages {

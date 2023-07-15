@@ -5,4 +5,8 @@
 	export let data: PageData;
 </script>
 
-<Chat sid={data.sid} removeProfilePicture={data.removeProfile} />
+{#if data.error}
+	<h1>{data.error.message}</h1>
+{:else}
+	<Chat sid={data.sid} removeProfilePicture={data.removeProfile} />
+{/if}
