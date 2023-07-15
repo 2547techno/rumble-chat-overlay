@@ -56,6 +56,7 @@
 	#messages {
 		overflow: hidden;
 		height: 95vh;
+		padding: 10px;
 		display: flex;
 		flex-direction: column-reverse;
 	}
