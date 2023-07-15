@@ -86,6 +86,7 @@
 		height: 100vh;
 		width: 100vw;
 		background-color: rgb(125, 125, 125);
+		color: black;
 		font-weight: 400;
 		font-family: 'Roboto', sans-serif;
 	}
