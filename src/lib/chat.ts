@@ -35,3 +35,13 @@ export class MessageList {
 		this.messages.push(msg);
 	}
 }
+
+export type Emote = {
+	id: number;
+	name: string;
+	packId: number;
+	emotesPackId: number;
+	isSubsOnly: boolean;
+	moderationStatus: string;
+	file: string;
+};

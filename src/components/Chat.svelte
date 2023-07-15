@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_API } from '$env/static/public';
 	import { onDestroy, onMount } from 'svelte';
-	import { MessageList, type Message } from '../lib/chat';
+	import { MessageList, type Message, type Emote } from '../lib/chat';
 	import MessageCard from './MessageCard.svelte';
 
 	let sse: EventSource | undefined;
@@ -9,8 +9,9 @@
 
 	let messageList: MessageList | undefined = new MessageList(0);
 	let messages: Message[] = [];
+	let emotes: Emote[] = [];
 
-	onMount(() => {
+	function createEventSource() {
 		const source = new EventSource(new URL(`/events/chat/${sid}`, PUBLIC_API));
 		messageList = new MessageList(20);
 
@@ -20,7 +21,20 @@
 			messages = messageList?.messages ?? [];
 		});
 
-		sse = source;
+		return source;
+	}
+
+	async function getEmotes() {
+		const res = await fetch(new URL(`/emotes/${sid}`, PUBLIC_API));
+		if (!res.ok) return [];
+
+		const data = await res.json();
+		return data as Emote[];
+	}
+
+	onMount(async () => {
+		emotes = await getEmotes();
+		sse = createEventSource();
 	});
 
 	onDestroy(() => {
@@ -33,7 +47,7 @@
 
 <div id="messages">
 	{#each messages as message}
-		<MessageCard {message} />
+		<MessageCard {message} {emotes} />
 	{/each}
 </div>
 

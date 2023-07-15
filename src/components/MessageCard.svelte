@@ -1,8 +1,50 @@
 <script lang="ts">
-	import type { Message } from '../lib/chat';
+	import type { Emote, Message } from '../lib/chat';
 
 	export let message: Message;
 	export let showProfilePicture = true;
+	export let emotes: Emote[];
+
+	let messageHTML = '';
+
+	function createEmoteElement(word: string): HTMLImageElement | undefined {
+		const emote = emotes.find((e) => e.name === word);
+		if (!emote) return;
+
+		const img = document.createElement('img');
+		img.src = emote.file;
+		img.height = 25;
+
+		return img;
+	}
+
+	$: {
+		// insert emotes
+		const words = message.text.split(' ');
+		const elems: (HTMLSpanElement | HTMLImageElement)[] = [];
+		elems.push(document.createElement('span'));
+		for (let i = 0; i < words.length; i++) {
+			const word = words[i];
+			if (word.startsWith(':') && word.endsWith(':')) {
+				const emoteElem = createEmoteElement(word.slice(1, word.length - 1));
+				if (emoteElem) {
+					elems.push(emoteElem);
+					const span = document.createElement('span');
+					span.innerText = ' ';
+					elems.push(span);
+				} else {
+					elems[elems.length - 1].innerText += `${word} `;
+				}
+			} else {
+				elems[elems.length - 1].innerText += `${word} `;
+			}
+		}
+
+		messageHTML = '';
+		elems.forEach((elem) => {
+			messageHTML += elem.outerHTML;
+		});
+	}
 </script>
 
 <div class="message">
@@ -18,7 +60,8 @@
 		<span class="username" style={`color: ${message.from.color}`}>
 			<strong>{message.from.username}</strong>
 		</span>
-		{message.text}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		{@html messageHTML}
 	</p>
 </div>
 
