@@ -7,6 +7,7 @@
 	let sse: EventSource | undefined;
 	export let sid: number;
 	export let removeProfilePicture = false;
+	export let maxMessages: number;
 
 	let messageList: MessageList | undefined = new MessageList(0);
 	let messages: Message[] = [];
@@ -16,7 +17,7 @@
 
 	function createEventSource() {
 		const source = new EventSource(url);
-		messageList = new MessageList(50);
+		messageList = new MessageList(maxMessages);
 
 		source.addEventListener('message', (msg) => {
 			const data: Message[] = JSON.parse(msg.data);

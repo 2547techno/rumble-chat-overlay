@@ -8,5 +8,5 @@
 {#if data.error}
 	<h1>{data.error.message}</h1>
 {:else}
-	<Chat sid={data.sid} removeProfilePicture={data.removeProfile} />
+	<Chat sid={data.sid} removeProfilePicture={data.removeProfile} maxMessages={data.maxMessages} />
 {/if}

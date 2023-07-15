@@ -4,20 +4,35 @@
 	let channel = '';
 	let video = '';
 	let removeProfile = true;
+	let maxMessages = 40;
 
 	$: c = channel.trim();
 	$: v = video.trim();
 
 	function goToChannel() {
 		if (c === '') return;
-		goto(`/overlay/c/${c}${removeProfile ? '?removeProfile' : ''}`);
+		const params = new URLSearchParams();
+		if (removeProfile) {
+			params.append('removeProfile', '1');
+		}
+		if (maxMessages) {
+			params.append('maxMessages', String(maxMessages));
+		}
+		goto(`/overlay/c/${c}?${params.toString()}`);
 	}
 
 	function goToVideo() {
 		if (v === '') return;
 		const id = v.split('-')[0];
 
-		goto(`/overlay/v/${id}${removeProfile ? '?removeProfile' : ''}`);
+		const params = new URLSearchParams();
+		if (removeProfile) {
+			params.append('removeProfile', '1');
+		}
+		if (maxMessages) {
+			params.append('maxMessages', String(maxMessages));
+		}
+		goto(`/overlay/v/${id}?${params.toString()}`);
 	}
 </script>
 
@@ -28,7 +43,16 @@
 	<div class="options-container">
 		<div class="option">
 			<label for="remove-profile">Remove Profile Picture: </label>
-			<input bind:checked={removeProfile} type="checkbox" name="remove-profile" id="remove-profile" />
+			<input
+				bind:checked={removeProfile}
+				type="checkbox"
+				name="remove-profile"
+				id="remove-profile"
+			/>
+		</div>
+		<div class="option">
+			<label for="max-messages">Max Messages: </label>
+			<input bind:value={maxMessages} type="number" name="max-messages" id="max-messages" />
 		</div>
 	</div>
 
@@ -69,6 +93,10 @@
 	.options-container {
 		.option {
 			margin-bottom: 10px;
+		}
+
+		#max-messages {
+			width: 50px;
 		}
 	}
 

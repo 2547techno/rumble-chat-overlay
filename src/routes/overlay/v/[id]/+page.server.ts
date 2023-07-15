@@ -19,6 +19,7 @@ export const load = (async ({ params, url }) => {
 		error,
 		id,
 		sid,
-		removeProfile: url.searchParams.has('removeProfile')
+		removeProfile: url.searchParams.has('removeProfile'),
+		maxMessages: Number(url.searchParams.get('maxMessages') ?? 40)
 	};
 }) satisfies PageServerLoad;
