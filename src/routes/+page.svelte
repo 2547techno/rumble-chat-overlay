@@ -58,7 +58,6 @@
 	}
 
 	.input-container {
-		border: red solid 1px;
 		margin-top: 20px;
 		display: flex;
 		flex-direction: column;
