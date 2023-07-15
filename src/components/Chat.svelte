@@ -13,12 +13,12 @@
 
 	function createEventSource() {
 		const source = new EventSource(new URL(`/events/chat/${sid}`, PUBLIC_API));
-		messageList = new MessageList(20);
+		messageList = new MessageList(50);
 
 		source.addEventListener('message', (msg) => {
 			const data: Message[] = JSON.parse(msg.data);
 			messageList?.add(data);
-			messages = messageList?.messages ?? [];
+			messages = ([] as Message[]).concat(messageList?.messages ?? []).reverse();
 		});
 
 		return source;
@@ -53,7 +53,9 @@
 
 <style scoped lang="scss">
 	#messages {
-		// border: red solid 1px;
-		height: 100vh;
+		overflow-y: hidden;
+		height: 98vh;
+		display: flex;
+		flex-direction: column-reverse;
 	}
 </style>

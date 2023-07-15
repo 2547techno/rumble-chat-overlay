@@ -68,10 +68,8 @@
 <style scoped lang="scss">
 	@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 	.message {
-		// border: blue solid 1px;
 		margin: 3px;
 		display: flex;
-		min-height: 25px;
 		font-family: 'Poppins', sans-serif;
 
 		p {
