@@ -3,7 +3,7 @@
 
 	let channel = '';
 	let video = '';
-	let removeProfile = false;
+	let removeProfile = true;
 
 	$: c = channel.trim();
 	$: v = video.trim();
@@ -28,7 +28,7 @@
 	<div class="options-container">
 		<div class="option">
 			<label for="remove-profile">Remove Profile Picture: </label>
-			<input bind:value={removeProfile} type="checkbox" name="remove-profile" id="remove-profile" />
+			<input bind:checked={removeProfile} type="checkbox" name="remove-profile" id="remove-profile" />
 		</div>
 	</div>
 
