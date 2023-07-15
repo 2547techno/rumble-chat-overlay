@@ -6,6 +6,7 @@
 
 	let sse: EventSource | undefined;
 	export let sid: number;
+	export let removeProfilePicture = false;
 
 	let messageList: MessageList | undefined = new MessageList(0);
 	let messages: Message[] = [];
@@ -47,7 +48,7 @@
 
 <div id="messages">
 	{#each messages as message}
-		<MessageCard {message} {emotes} />
+		<MessageCard {message} {emotes} {removeProfilePicture} />
 	{/each}
 </div>
 

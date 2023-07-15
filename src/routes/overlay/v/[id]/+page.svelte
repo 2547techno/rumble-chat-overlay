@@ -5,4 +5,4 @@
 	export let data: PageData;
 </script>
 
-<Chat sid={data.sid} />
+<Chat sid={data.sid} removeProfilePicture={data.removeProfile} />

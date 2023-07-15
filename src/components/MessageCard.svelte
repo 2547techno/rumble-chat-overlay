@@ -2,7 +2,7 @@
 	import type { Emote, Message } from '../lib/chat';
 
 	export let message: Message;
-	export let showProfilePicture = true;
+	export let removeProfilePicture: boolean;
 	export let emotes: Emote[];
 
 	let messageHTML = '';
@@ -48,7 +48,7 @@
 </script>
 
 <div class="message">
-	{#if showProfilePicture}
+	{#if !removeProfilePicture}
 		{#if message.from.profilePicture}
 			<div class="pfp">
 				<img src={message.from.profilePicture} alt={message.from.username} />

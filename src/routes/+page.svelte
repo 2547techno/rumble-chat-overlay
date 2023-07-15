@@ -3,25 +3,34 @@
 
 	let channel = '';
 	let video = '';
+	let removeProfile = false;
 
 	$: c = channel.trim();
 	$: v = video.trim();
 
 	function goToChannel() {
 		if (c === '') return;
-		goto(`/overlay/c/${c}`);
+		goto(`/overlay/c/${c}${removeProfile ? '?removeProfile' : ''}`);
 	}
 
 	function goToVideo() {
 		if (v === '') return;
 		const id = v.split('-')[0];
 
-		goto(`/overlay/v/${id}`);
+		goto(`/overlay/v/${id}${removeProfile ? '?removeProfile' : ''}`);
 	}
 </script>
 
 <div id="page">
-	<h1>Get Overlay Link</h1>
+	<h1>Get Rumble Overlay Link</h1>
+
+	<h3>Options:</h3>
+	<div class="options-container">
+		<div class="option">
+			<label for="remove-profile">Remove Profile Picture: </label>
+			<input bind:value={removeProfile} type="checkbox" name="remove-profile" id="remove-profile" />
+		</div>
+	</div>
 
 	<div class="input-container">
 		<p>Channel</p>
@@ -55,6 +64,12 @@
 		background-color: rgb(125, 125, 125);
 		font-weight: 400;
 		font-family: 'Roboto', sans-serif;
+	}
+
+	.options-container {
+		.option {
+			margin-bottom: 10px;
+		}
 	}
 
 	.input-container {
