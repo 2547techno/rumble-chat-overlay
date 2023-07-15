@@ -55,7 +55,7 @@
 <style scoped lang="scss">
 	#messages {
 		overflow: hidden;
-		height: 98vh;
+		height: 95vh;
 		display: flex;
 		flex-direction: column-reverse;
 	}
