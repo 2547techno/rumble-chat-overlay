@@ -9,11 +9,15 @@
 	export let removeProfilePicture = false;
 	export let maxMessages: number;
 
-	let messageList: MessageList | undefined = new MessageList(0);
+	let messageList: MessageList = new MessageList(maxMessages);
 	let messages: Message[] = [];
 	let emotes: Emote[] = [];
 	const url = new URL(`/events/chat/${sid}`, PUBLIC_API);
 	let error: { message: string } | undefined;
+
+	function renderMessages() {
+		messages = ([] as Message[]).concat(messageList?.messages ?? []).reverse();
+	}
 
 	function createEventSource() {
 		const source = new EventSource(url);
@@ -21,8 +25,23 @@
 
 		source.addEventListener('message', (msg) => {
 			const data: Message[] = JSON.parse(msg.data);
-			messageList?.add(data);
-			messages = ([] as Message[]).concat(messageList?.messages ?? []).reverse();
+			messageList.add(data);
+			renderMessages()
+		});
+
+		source.addEventListener('error', () => {
+			messageList.addMessage({
+				id: 'error',
+				timestamp: 'error',
+				text: '',
+				from: {
+					id: 'error',
+					username: 'Error: Try refreshing if stream is live',
+					isFollower: false,
+					color: '#ff1010'
+				}
+			});
+			renderMessages()
 		});
 
 		return source;
@@ -37,14 +56,6 @@
 	}
 
 	onMount(async () => {
-		const res = await fetch(url);
-		if (!res.ok) {
-			error = {
-				message: 'Stream Is Not Live!'
-			};
-			return;
-		}
-
 		emotes = await getEmotes();
 		sse = createEventSource();
 	});
