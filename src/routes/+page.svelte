@@ -56,7 +56,7 @@
 		</div>
 	</div>
 
-	<div class="input-container">
+	<!-- <div class="input-container">
 		<p>Channel</p>
 		<div class="input">
 			<input bind:value={channel} type="text" name="channel-input" placeholder="ex. LofiGirl" />
@@ -64,7 +64,7 @@
 		</div>
 	</div>
 
-	<h4 style="margin-top: 20px;">OR</h4>
+	<h4 style="margin-top: 20px;">OR</h4> -->
 
 	<div class="input-container">
 		<p>Video ID (or video path)</p>
