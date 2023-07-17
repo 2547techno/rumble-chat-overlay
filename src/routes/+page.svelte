@@ -9,7 +9,7 @@
 
 	$: c = channel.trim();
 	$: v = video.trim();
-	$: u =  user.trim();
+	$: u = user.trim();
 
 	function goToChannel() {
 		if (c === '') return;
@@ -109,7 +109,9 @@
 			<h4>Note:</h4>
 			<p>
 				Rumble may take some time to switch to the correct stream.
-				<strong>If you recently started/restarted your stream this method may take a while to work.</strong>
+				<strong
+					>If you recently started/restarted your stream this method may take a while to work.</strong
+				>
 				Double check that <u>https://rumble.com/c/[yourchannel]/live</u> points to the correct stream.
 			</p>
 		</div>
@@ -132,8 +134,10 @@
 		<div class="note-container">
 			<h4>Note:</h4>
 			<p>
-				Rumble make take some time to switch to the correct stream.
-				<strong>If you recently started/restarted your stream this method may take a while to work.</strong>
+				Rumble may take some time to switch to the correct stream.
+				<strong
+					>If you recently started/restarted your stream this method may take a while to work.</strong
+				>
 				Double check that <u>https://rumble.com/user/[username]/live</u> points to the correct stream.
 			</p>
 		</div>
@@ -182,7 +186,7 @@
 
 		.input-subtitle {
 			color: rgb(0, 163, 0);
-			text-shadow:  0px 0px 15px black;
+			text-shadow: 0px 0px 15px black;
 			margin-bottom: 5px;
 		}
 
