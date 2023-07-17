@@ -26,7 +26,7 @@
 		source.addEventListener('message', (msg) => {
 			const data: Message[] = JSON.parse(msg.data);
 			messageList.add(data);
-			renderMessages()
+			renderMessages();
 		});
 
 		source.addEventListener('error', () => {
@@ -36,12 +36,13 @@
 				text: '',
 				from: {
 					id: 'error',
-					username: 'Error: Is the stream live? Try refreshing or use video ID instead of channel name',
+					username:
+						'Error: Is the stream live? Try refreshing or use video ID instead of channel name',
 					isFollower: false,
 					color: '#ff1010'
 				}
 			});
-			renderMessages()
+			renderMessages();
 		});
 
 		return source;

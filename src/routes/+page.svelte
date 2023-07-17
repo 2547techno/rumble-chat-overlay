@@ -36,11 +36,10 @@
 	}
 
 	function handleKeyPress(e: KeyboardEvent, callback: () => void) {
-		if (e.key === "Enter") {
+		if (e.key === 'Enter') {
 			callback();
 		}
 	}
-
 </script>
 
 <div id="page">
@@ -66,21 +65,35 @@
 	<div class="input-container">
 		<p>Video ID (or video path)</p>
 		<div class="input">
-			<input on:keypress={e => handleKeyPress(e, goToVideo)} bind:value={video} type="text" name="video-input" placeholder="ex. v1heynx" />
+			<input
+				on:keypress={(e) => handleKeyPress(e, goToVideo)}
+				bind:value={video}
+				type="text"
+				name="video-input"
+				placeholder="ex. v1heynx"
+			/>
 			<button on:click={goToVideo}>→</button>
 		</div>
 	</div>
-	
+
 	<h4 style="margin-top: 20px;">OR</h4>
-	
+
 	<div class="input-container">
 		<p>Channel</p>
 		<div class="input">
-			<input on:keypress={e => handleKeyPress(e, goToChannel)} bind:value={channel} type="text" name="channel-input" placeholder="ex. LofiGirl" />
+			<input
+				on:keypress={(e) => handleKeyPress(e, goToChannel)}
+				bind:value={channel}
+				type="text"
+				name="channel-input"
+				placeholder="ex. LofiGirl"
+			/>
 			<button on:click={goToChannel}>→</button>
 		</div>
 		<p>Note:</p>
-		<strong>If you recently started/restarted your stream this method may take a while to work.</strong>
+		<strong
+			>If you recently started/restarted your stream this method may take a while to work.</strong
+		>
 		Double check that <u>https://rumble.com/c/yourchannel/live</u> points to the correct stream.
 	</div>
 </div>
