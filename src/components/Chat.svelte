@@ -36,7 +36,7 @@
 				text: '',
 				from: {
 					id: 'error',
-					username: 'Error: Try refreshing if stream is live',
+					username: 'Error: Is the stream live? Try refreshing or use video ID instead of channel name',
 					isFollower: false,
 					color: '#ff1010'
 				}
