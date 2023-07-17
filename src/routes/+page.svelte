@@ -34,6 +34,13 @@
 		}
 		goto(`/overlay/v/${id}?${params.toString()}`);
 	}
+
+	function handleKeyPress(e: KeyboardEvent, callback: () => void) {
+		if (e.key === "Enter") {
+			callback();
+		}
+	}
+
 </script>
 
 <div id="page">
@@ -59,7 +66,7 @@
 	<div class="input-container">
 		<p>Video ID (or video path)</p>
 		<div class="input">
-			<input bind:value={video} type="text" name="video-input" placeholder="ex. v1heynx" />
+			<input on:keypress={e => handleKeyPress(e, goToVideo)} bind:value={video} type="text" name="video-input" placeholder="ex. v1heynx" />
 			<button on:click={goToVideo}>→</button>
 		</div>
 	</div>
@@ -69,7 +76,7 @@
 	<div class="input-container">
 		<p>Channel</p>
 		<div class="input">
-			<input bind:value={channel} type="text" name="channel-input" placeholder="ex. LofiGirl" />
+			<input on:keypress={e => handleKeyPress(e, goToChannel)} bind:value={channel} type="text" name="channel-input" placeholder="ex. LofiGirl" />
 			<button on:click={goToChannel}>→</button>
 		</div>
 		<p>Note:</p>
