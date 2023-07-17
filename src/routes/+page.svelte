@@ -57,21 +57,24 @@
 	</div>
 
 	<div class="input-container">
-		<p>Channel</p>
-		<div class="input">
-			<input bind:value={channel} type="text" name="channel-input" placeholder="ex. LofiGirl" />
-			<button on:click={goToChannel}>→</button>
-		</div>
-	</div>
-
-	<h4 style="margin-top: 20px;">OR</h4>
-
-	<div class="input-container">
 		<p>Video ID (or video path)</p>
 		<div class="input">
 			<input bind:value={video} type="text" name="video-input" placeholder="ex. v1heynx" />
 			<button on:click={goToVideo}>→</button>
 		</div>
+	</div>
+	
+	<h4 style="margin-top: 20px;">OR</h4>
+	
+	<div class="input-container">
+		<p>Channel</p>
+		<div class="input">
+			<input bind:value={channel} type="text" name="channel-input" placeholder="ex. LofiGirl" />
+			<button on:click={goToChannel}>→</button>
+		</div>
+		<p>Note:</p>
+		<strong>If you recently started/restarted your stream this method may take a while to work.</strong>
+		Double check that <u>https://rumble.com/c/yourchannel/live</u> points to the correct stream.
 	</div>
 </div>
 
@@ -103,9 +106,13 @@
 
 	.input-container {
 		margin-top: 20px;
+		padding: 20px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		width: 500px;
+		border: rgba(0, 0, 0, 0.2) solid 2px;
+		border-radius: 5px;
 
 		p {
 			margin-bottom: 5px;
