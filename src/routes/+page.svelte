@@ -89,12 +89,11 @@
 	@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 
 	#page {
+		padding-bottom: 100px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		height: 100vh;
-		width: 100vw;
 		background-color: rgb(125, 125, 125);
 		color: black;
 		font-weight: 400;
