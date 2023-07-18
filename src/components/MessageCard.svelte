@@ -49,7 +49,8 @@
 
 <div class="message">
 	{#if !removeProfilePicture}
-		{#if message.from.profilePicture}
+		<!-- for some reason facebook images are not being cached by the browser & obs, maybe too large? -->
+		{#if message.from.profilePicture && new URL(message.from.profilePicture).hostname !== "graph.facebook.com"} 
 			<div class="pfp">
 				<img src={message.from.profilePicture} alt={message.from.username} />
 			</div>
